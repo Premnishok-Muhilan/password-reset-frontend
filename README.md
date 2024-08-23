@@ -35,3 +35,22 @@ This application was created by Prem.
 ## Acknowledgements
 
 This application was created as part of the Full Stack Developer course at [Guvi](https://www.guvi.in/).
+
+## Project Workflow
+
+### Project Requirements:
+
+- View a list of todos
+- Add a new todo
+- Mark a todo as completed
+- Delete a todo
+- Update a todo description and status
+
+### Views:
+
+[x] Home Page
+
+- [x] Header
+- [x] Navigation
+- [x] Todo List
+- [x] Add Todo Form
