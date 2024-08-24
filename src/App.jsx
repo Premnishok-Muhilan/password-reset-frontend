@@ -1,13 +1,15 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
+import todoLoader from "../loaders/todoLoader";
 
 // create a router object
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />
-  }
-])
+    element: <Home />,
+    loader: todoLoader,
+  },
+]);
 
 function App() {
   return <RouterProvider router={router} />;
