@@ -1,10 +1,11 @@
-import axios from "axios";
+import todoServices from "../services/todoServices";
 
-const todoLoader = async () => {
-  //make a request to the server
-  const response = await axios.get("http://localhost:3001/api/v1/todos");
+const todosLoader = async () => {
+  // make a request to the server
+  const response = await todoServices.getTodos();
 
+  // return the response
   return response.data.todos;
 };
 
-export default todoLoader;
+export default todosLoader;
