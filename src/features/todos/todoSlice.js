@@ -5,6 +5,8 @@ export const todoSlice = createSlice({
   initialState: {
     newTodo: "",
     status: false,
+    isEditing: false,
+    isEditingId: "",
   },
   reducers: {
     setNewTodo: (state, action) => {
@@ -16,14 +18,32 @@ export const todoSlice = createSlice({
     clearForm: (state) => {
       state.newTodo = "";
       state.status = false;
+      state.isEditing = false;
+      state.isEditingId = "";
+    },
+    setIsEditing: (state, action) => {
+      state.isEditing = action.payload;
+    },
+    setIsEditingId: (state, action) => {
+      state.isEditingId = action.payload;
     },
   },
 });
 
-export const { setNewTodo, setStatus, clearForm } = todoSlice.actions;
+export const {
+  setNewTodo,
+  setStatus,
+  clearForm,
+  setIsEditing,
+  setIsEditingId,
+} = todoSlice.actions;
 
 export const selectNewTodo = (state) => state.todos.newTodo;
 
 export const selectStatus = (state) => state.todos.status;
+
+export const selectIsEditing = (state) => state.todos.isEditing;
+
+export const selectIsEditingId = (state) => state.todos.isEditingId;
 
 export default todoSlice.reducer;
