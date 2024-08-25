@@ -4,6 +4,8 @@ import { configureStore } from "@reduxjs/toolkit";
 
 // Import the `todoReducer` from the `../features/todos/todoSlice` module.
 // This reducer is responsible for handling actions and updating the state related to todos.
+//importing the default export from the ../features/todos/todoSlice module.
+//This default export is expected to be a Redux reducer function that manages the state related to todos.
 import todoReducer from "../features/todos/todoSlice";
 
 // Create the Redux store using `configureStore`.
