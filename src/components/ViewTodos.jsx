@@ -11,11 +11,6 @@ const ViewTodos = () => {
     const navigate = useNavigate();
 
     const handleTodoClick = (todo) => {
-        // dispatch(setNewTodo(todo.description));
-        // dispatch(setStatus(todo.status));
-        // dispatch(setIsEditing(true));
-        // dispatch(setIsEditingId(todo._id));
-
         navigate(`/todos/${todo._id}`);
     }
 
@@ -39,9 +34,18 @@ const ViewTodos = () => {
         }
     }
 
+    const handleAddTodoClick = () => {
+        navigate('/add-todo');
+    }
+
+
   return (
     <div>
         <h1>Todos</h1>
+        <button onClick={handleAddTodoClick}>
+            Add a new todo
+        </button>
+        <br /><br />
         <ul className="todoList">
         {
             todos
