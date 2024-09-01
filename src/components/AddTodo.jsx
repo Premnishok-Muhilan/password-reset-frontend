@@ -1,78 +1,94 @@
 import todoServices from "../services/todoServices";
-import { clearForm, selectIsEditing, selectIsEditingId, selectNewTodo, selectStatus, setNewTodo, setStatus } from "../features/todos/todoSlice";
+import {
+  clearForm,
+  selectIsEditing,
+  selectIsEditingId,
+  selectNewTodo,
+  selectStatus,
+  setNewTodo,
+  setStatus,
+} from "../features/todos/todoSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const AddTodo = () => {
+  const newTodo = useSelector(selectNewTodo);
+  const status = useSelector(selectStatus);
 
-    const newTodo = useSelector(selectNewTodo);
-    const status = useSelector(selectStatus);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-  
   const isEditing = useSelector(selectIsEditing);
   const isEditingId = useSelector(selectIsEditingId);
 
-    const handleAddTodo = async (e) => {
-      e.preventDefault();
-      
-      if (!isEditing) {
-        // make a POST request to the server
-        todoServices.postTodo({
+  const handleAddTodo = async (e) => {
+    e.preventDefault();
+
+    if (!isEditing) {
+      // make a POST request to the server
+      // doesn't require the isEditingId
+      todoServices
+        .postTodo({
           description: newTodo,
-          status: status
+          status: status,
         })
-          .then(response => {
-            alert('Todo added successfully');
+        .then((response) => {
+          alert("Todo added successfully");
 
-            // clear the form
-            dispatch(clearForm());
+          // clear the form
+          dispatch(clearForm());
 
-            // reload the todos
-            navigate('/');
-          })
-          .catch(error => {
-            alert('Failed to add todo');
-          });
-      } else {
-        // make a PUT request to the server
-        todoServices.putTodo({
-          description: newTodo,
-          status: status
-        }, isEditingId)
-          .then(response => {
-            alert('Todo updated successfully');
+          // reload the todos
+          navigate("/");
+        })
+        .catch((error) => {
+          alert("Failed to add todo");
+        });
+    } else {
+      // make a PUT request to the server
+      // for edit request using isEditingId
+      todoServices
+        .putTodo(
+          {
+            description: newTodo,
+            status: status,
+          },
+          isEditingId
+        )
+        .then((response) => {
+          alert("Todo updated successfully");
 
-            // clear the form
-            dispatch(clearForm());
+          // clear the form
+          dispatch(clearForm());
 
-            // reload the todos
-            navigate('/');
-          })
-          .catch(error => {
-            alert('Failed to update todo');
-            console.log(error);
-          });
-      }
-  }
+          // reload the todos
+          navigate("/");
+        })
+        .catch((error) => {
+          alert("Failed to update todo");
+          console.log(error);
+        });
+    }
+  };
 
   return (
     <form onSubmit={handleAddTodo}>
       <div>
-        <input 
+        <input
           type="text"
           placeholder="Add Todo..."
           value={newTodo}
           onChange={(e) => dispatch(setNewTodo(e.target.value))}
-          style={{ width: '500px' }}
+          style={{ width: "500px" }}
         />
       </div>
       <br />
       <div>
         <select
-          value={status ? 'True' : 'False'}
-          onChange={(e) => dispatch(setStatus(e.target.value === 'True' ? true : false))}
+          value={status ? "True" : "False"}
+          onChange={(e) =>
+            dispatch(setStatus(e.target.value === "True" ? true : false))
+          }
         >
           <option>False</option>
           <option>True</option>
@@ -80,10 +96,10 @@ const AddTodo = () => {
       </div>
       <br />
       <div>
-        <button type="submit">{ isEditing ? 'Update Todo': 'Add Todo' }</button>
+        <button type="submit">{isEditing ? "Update Todo" : "Add Todo"}</button>
       </div>
-      </form>
-  )
-}
+    </form>
+  );
+};
 
 export default AddTodo;
