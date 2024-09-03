@@ -35,12 +35,7 @@ const ViewTodos = () => {
         )
         .then(() => {
           alert("Todo updated");
-          /*
-          Navigate to the same page
-          in order to get the changes 
-          from the database and 
-          render using those changes
-          */
+
           navigate("/", { replace: true });
         })
         .catch((err) => {
@@ -55,7 +50,7 @@ const ViewTodos = () => {
 
   return (
     <div>
-      <h1>Todos</h1>
+      <h1 className="mt-3">Todos</h1>
       <button onClick={handleAddTodoClick}>Add a new todo</button>
       <br />
       <br />

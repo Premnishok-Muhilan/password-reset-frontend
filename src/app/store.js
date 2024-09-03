@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import todoReducer from "../features/todos/todoSlice";
 import registerReducer from "../features/users/registerSlice";
+import loginReducer from "../features/users/loginSlice";
 
 const store = configureStore({
     reducer: {
         todos: todoReducer,
-        register: registerReducer
+        register: registerReducer,
+        login: loginReducer
     }
 });
 

@@ -9,6 +9,9 @@ import ViewTodos from "./components/ViewTodos";
 import HomeNav from "./wrappers/HomeNav";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import UserDashboardNav from "./wrappers/UserDashboardNav";
+import userLoader from "./loaders/userLoader";
+import Logout from "./components/Logout";
 
 // create a router object
 const router = createBrowserRouter([
@@ -32,7 +35,8 @@ const router = createBrowserRouter([
   },
   {
     path: 'dashboard',
-    element: <UserDashboard />,
+    element: <UserDashboardNav />,
+    loader: userLoader,
     children: [
       {
         path: '',
@@ -53,6 +57,10 @@ const router = createBrowserRouter([
         element: <AddTodo />
       }
     ]
+  },
+  {
+    path: "logout",
+    element: <Logout />
   }
 ]);
 
