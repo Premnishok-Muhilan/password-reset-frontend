@@ -15,7 +15,7 @@ const ViewTodos = () => {
   const navigate = useNavigate();
 
   const handleTodoClick = (todo) => {
-    navigate(`/todos/${todo._id}`);
+    navigate(`/dashboard/todos/${todo._id}`);
   };
 
   const handleCheck = (todo) => {
@@ -36,7 +36,7 @@ const ViewTodos = () => {
         .then(() => {
           alert("Todo updated");
 
-          navigate("/", { replace: true });
+          navigate("/dashboard", { replace: true });
         })
         .catch((err) => {
           console.error(err);
@@ -45,7 +45,7 @@ const ViewTodos = () => {
   };
 
   const handleAddTodoClick = () => {
-    navigate("/add-todo");
+    navigate("/dashboard/add-todo");
   };
 
   return (

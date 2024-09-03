@@ -26,7 +26,6 @@ const AddTodo = () => {
 
     if (!isEditing) {
       // make a POST request to the server
-      // doesn't require the isEditingId
       todoServices
         .postTodo({
           description: newTodo,
@@ -39,14 +38,13 @@ const AddTodo = () => {
           dispatch(clearForm());
 
           // reload the todos
-          navigate("/");
+          navigate("/dashboard");
         })
         .catch((error) => {
           alert("Failed to add todo");
         });
     } else {
       // make a PUT request to the server
-      // for edit request using isEditingId
       todoServices
         .putTodo(
           {
@@ -62,7 +60,7 @@ const AddTodo = () => {
           dispatch(clearForm());
 
           // reload the todos
-          navigate("/");
+          navigate("/dashboard");
         })
         .catch((error) => {
           alert("Failed to update todo");
