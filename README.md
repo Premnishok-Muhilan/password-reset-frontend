@@ -1,4 +1,4 @@
-# FSD56WE-E React Application
+# Password reset React Application
 
 This application is a simple React application that displays a list of todos.
 
@@ -18,39 +18,6 @@ To install the application, follow these steps:
 2. Run `npm install` to install the dependencies
 3. Run `npm run dev` to start the application
 
-## Usage
-
-The application displays a list of todos. You can add a new todo, mark a todo as completed, and delete a todo.
-
-## License
-
-This project is licensed under the MIT license.
-
-The Backend API for this application can be found [here](https://nodejs-day4-session.onrender.com/api/v1).
-
 ## Author
 
 This application was created by Prem.
-
-## Acknowledgements
-
-This application was created as part of the Full Stack Developer course at [Guvi](https://www.guvi.in/).
-
-## Project Workflow
-
-### Project Requirements:
-
-- View a list of todos
-- Add a new todo
-- Mark a todo as completed
-- Delete a todo
-- Update a todo description and status
-
-### Views:
-
-[x] Home Page
-
-- [x] Header
-- [x] Navigation
-- [x] Todo List
-- [x] Add Todo Form
