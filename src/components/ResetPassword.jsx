@@ -1,85 +1,100 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
-  selectEmail,
+  selectPasswordResetToken,
   selectPassword,
-  setEmail,
+  selectConfirmPassword,
+  setPasswordResetToken,
   setPassword,
+  setConfirmPassword,
 } from "../features/users/loginSlice";
 import { useNavigate } from "react-router-dom";
 import userServices from "../services/userServices";
-import { Link } from "react-router-dom";
 
-const Login = () => {
-  const email = useSelector(selectEmail);
+export default function ResetPassword() {
+  const passwordResetToken = useSelector(selectPasswordResetToken);
   const password = useSelector(selectPassword);
+  const confirmPassword = useSelector(selectConfirmPassword);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleLogin = (e) => {
+  const handleResetPassword = (e) => {
     e.preventDefault();
 
     // perform the login
     userServices
-      .login({ username: email, password:password })
+      .resetPassword({ password: password, confirmPassword: confirmPassword, passwordResetToken:passwordResetToken})
       .then((response) => {
         alert(response.data.message);
 
         // clear the form
-        dispatch(setEmail(""));
+        dispatch(setPasswordResetToken(""));
         dispatch(setPassword(""));
+        dispatch(setConfirmPassword(""));
 
         setTimeout(() => {
-          navigate("/dashboard");
+          navigate("/login");
         }, 500);
+        // navigate("/dashboard");
       })
       .catch((error) => {
         alert(error.response.data.message);
       });
   };
-
   return (
     <div className="container mt-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <div className="card">
             <div className="card-header">
-              <h4>Login</h4>
+              <h4>Reset Password</h4>
             </div>
             <div className="card-body">
-              <form onSubmit={handleLogin}>
+              {/* <form onSubmit={handleLogin}> */}
+              <form onSubmit={handleResetPassword}>
                 <div className="mb-3">
                   <label htmlFor="email" className="form-label">
-                    Email
+                    Password reset token
                   </label>
                   <input
-                    type="email"
+                    type="text"
                     className="form-control"
                     id="email"
-                    value={email}
-                    onChange={(e) => dispatch(setEmail(e.target.value))}
+                    value={passwordResetToken}
+                    onChange={(e) =>
+                      dispatch(setPasswordResetToken(e.target.value))
+                    }
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="password" className="form-label">
+                  <label htmlFor="email" className="form-label">
                     Password
                   </label>
                   <input
                     type="password"
                     className="form-control"
-                    id="password"
+                    id="email"
                     value={password}
                     onChange={(e) => dispatch(setPassword(e.target.value))}
                   />
                 </div>
                 <div className="mb-3">
-                  <Link to="/forgot-password">
-                    <small className="text-body-secondary">Forgot Password?</small>
-                  </Link>
+                  <label htmlFor="email" className="form-label">
+                    Confirm password
+                  </label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="email"
+                    value={confirmPassword}
+                    onChange={(e) =>
+                      dispatch(setConfirmPassword(e.target.value))
+                    }
+                  />
                 </div>
 
                 <button type="submit" className="btn btn-primary">
-                  Login
+                  Reset password
                 </button>
               </form>
             </div>
@@ -88,6 +103,4 @@ const Login = () => {
       </div>
     </div>
   );
-};
-
-export default Login;
+}

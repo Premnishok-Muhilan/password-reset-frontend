@@ -7,47 +7,45 @@ import {
 } from "../features/users/loginSlice";
 import { useNavigate } from "react-router-dom";
 import userServices from "../services/userServices";
-import { Link } from "react-router-dom";
 
-const Login = () => {
+export default function ForgotPassword() {
   const email = useSelector(selectEmail);
-  const password = useSelector(selectPassword);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleLogin = (e) => {
+  const handleForgotPassword = (e) => {
     e.preventDefault();
 
     // perform the login
     userServices
-      .login({ username: email, password:password })
+      .forgotPassword({ username: email })
       .then((response) => {
         alert(response.data.message);
 
         // clear the form
         dispatch(setEmail(""));
-        dispatch(setPassword(""));
 
         setTimeout(() => {
-          navigate("/dashboard");
+          navigate("/reset-password");
         }, 500);
+        // navigate("/dashboard");
       })
       .catch((error) => {
         alert(error.response.data.message);
       });
   };
-
   return (
     <div className="container mt-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <div className="card">
             <div className="card-header">
-              <h4>Login</h4>
+              <h4>Forgot Password</h4>
             </div>
             <div className="card-body">
-              <form onSubmit={handleLogin}>
+              {/* <form onSubmit={handleLogin}> */}
+              <form onSubmit={handleForgotPassword}>
                 <div className="mb-3">
                   <label htmlFor="email" className="form-label">
                     Email
@@ -60,26 +58,9 @@ const Login = () => {
                     onChange={(e) => dispatch(setEmail(e.target.value))}
                   />
                 </div>
-                <div className="mb-3">
-                  <label htmlFor="password" className="form-label">
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    value={password}
-                    onChange={(e) => dispatch(setPassword(e.target.value))}
-                  />
-                </div>
-                <div className="mb-3">
-                  <Link to="/forgot-password">
-                    <small className="text-body-secondary">Forgot Password?</small>
-                  </Link>
-                </div>
 
                 <button type="submit" className="btn btn-primary">
-                  Login
+                  Send verification link
                 </button>
               </form>
             </div>
@@ -88,6 +69,4 @@ const Login = () => {
       </div>
     </div>
   );
-};
-
-export default Login;
+}

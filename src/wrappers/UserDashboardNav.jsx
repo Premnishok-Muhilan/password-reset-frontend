@@ -8,7 +8,7 @@ const UserDashboardNav = () => {
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
-            Todo App
+            Password Reset App
           </Link>
           <button
             className="navbar-toggler"
