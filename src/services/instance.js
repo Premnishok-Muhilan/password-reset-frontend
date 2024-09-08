@@ -4,7 +4,9 @@ import axios from "axios";
 
 // Define the base URL for the API.
 // This URL will be used as the base for all requests made with this Axios instance.
-const baseURL = "http://localhost:3001/api/v1";
+// const baseURL = "http://localhost:3001/api/v1";
+const baseURL = import.meta.env.VITE_DEPLOYED_BACKEND_URL;
+console.log(baseURL);
 
 // Create an Axios instance with custom configuration settings.
 // This instance will be used to make HTTP requests to the API with predefined settings.
